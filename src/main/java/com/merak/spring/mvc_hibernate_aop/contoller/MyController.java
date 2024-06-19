@@ -29,7 +29,6 @@ public class MyController {
     @RequestMapping("/addNewEmployee")
     public String addNewEmployee(Model model) {
 
-        // Создаём работника без параметров и возвращаем форму, которая позволяет заполнить поля работника, добавляя пустого работника в аттрибут
         Employee employee = new Employee();
         model.addAttribute("employee", employee);
 
@@ -37,23 +36,15 @@ public class MyController {
     }
 
     @RequestMapping("/saveEmployee")
-    public String saveEmployee(@ModelAttribute("employee") Employee employee /* Получаем из формы аттрибут employee с заполненными полями и сохраняем в базе*/) {
-
-        // Сохраняем работника с помощью метода из EmployeeService, который зависит от метода в EmployeeDAO и где мы через сессию и сохраняем работника
+    public String saveEmployee(@ModelAttribute("employee") Employee employee) {
         employeeService.saveEmployee(employee);
-
-        // После добавления работника возвращаем на начальную страницу
         return "redirect:/getAllEmployees";
     }
 
     @RequestMapping("/updateInfo")
-    public String updateEmployee(@RequestParam("empId") int id, Model model /* При вызове метода мы получаем id работника через кнопку */) {
-
+    public String updateEmployee(@RequestParam("empId") int id, Model model) {
         Employee employee = employeeService.getEmployee(id);
-
-        model.addAttribute("employee", employee); // Так как в форму "saveEmployee" мы передаём в modelAttribute значение "employee", то тут у нас атрибут должен называться так же
-
-        // Возвращаем тот же view для обновления данных пользователя
+        model.addAttribute("employee", employee);
         return "employee-info";
     }
 
