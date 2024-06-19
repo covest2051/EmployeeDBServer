@@ -45,10 +45,8 @@ public class EmployeeDAOImplementation implements EmployeeDAO{
     @Override
     public void deleteEmployee(int id) {
         Session session = sessionFactory.getCurrentSession();
-
-        // org.hibernate.query
-        Query<Employee> query = session.createQuery("delete from Employee where id =:employeeId"); // =:employeeId значит, что дальше мы пропишем вместо employeeId параметр
-        query.setParameter("employeeId", id); // Вставляем id в параметр
+        Query<Employee> query = session.createQuery("delete from Employee where id =:employeeId"); 
+        query.setParameter("employeeId", id); 
         query.executeUpdate();
     }
 }
