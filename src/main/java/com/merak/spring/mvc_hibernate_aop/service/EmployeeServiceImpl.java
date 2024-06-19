@@ -10,11 +10,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
-    // Тут мы просто будем вызывать метод getAllEmployees из EmployeeDEOImpl
-    // Для этого мы пропишем зависимость от DEO
-    // В таком случае Controller будет зависеть не от DAO напрямую, а от EmployeeService
-    // И @Transactional мы из EmployeeDEOImpl переносим сюда поверх метода getAllEmployees
-
     @Autowired
     private EmployeeDAO employeeDAO;
 
